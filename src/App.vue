@@ -1,9 +1,7 @@
-<script setup>
-
-</script>
-
 <template>
-	
+	<product-page></product-page>
 </template>
 
-<style></style>
+<script setup>
+import ProductPage from './components/ProductPage.vue';
+</script>
