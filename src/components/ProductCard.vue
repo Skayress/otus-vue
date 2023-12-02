@@ -18,16 +18,16 @@
 		</p>
 		<div class="rating">
 			<img src="./../assets/images/icon-star.png" alt="">
-			<span>{{ rate }}</span>
+			<span>{{ rating.rate }}</span>
 		</div>
-		<p class="quantity">In Stock: {{ count }}</p>
+		<p class="quantity">In Stock: {{ rating.count }}</p>
 	</div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 
-const props = defineProps(['title', 'price', 'descr', 'category', 'img', 'rate', 'count'])
+const props = defineProps(['title', 'price', 'descr', 'category', 'img', 'rating'])
 
 const categoryProduct = computed(() => {
 	switch (props.category) {

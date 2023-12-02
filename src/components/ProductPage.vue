@@ -1,4 +1,6 @@
 <template>
+	<loader v-if="isLoading"></loader>
+
 	<div class="product-list">
 		<product-card
 			v-for="card in products"
@@ -8,8 +10,7 @@
 			:descr="card.description"
 			:category="card.category"
 			:img="card.image"
-			:rate="card.rating.rate"
-			:count="card.rating.count"
+			:rating="card.rating"
 		></product-card>
 	</div>
 </template>
@@ -17,19 +18,15 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import ProductCard from './ProductCard.vue';
+import Loader from './Loader.vue';
+import getProducts from '../services/get-products';
 
 const products = ref(null)
+const isLoading = ref(false)
 
 onBeforeMount(async () => {
-	try {
-		const URL = 'https://fakestoreapi.com/products'
-		const response = await fetch(URL)
-		if (response.ok) {
-			products.value = await response.json()
-			console.log(products.value);
-		}
-	} catch (e) {
-		console.log("Ошибка запроса", e);
-	}
+	isLoading.value = true
+	products.value = await getProducts()
+	isLoading.value = false
 }) 
 </script>
